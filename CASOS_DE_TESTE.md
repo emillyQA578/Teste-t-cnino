@@ -64,7 +64,8 @@ Dados resetados via `POST /_reset`. Existe uma transportadora ativa com `prazo_d
 O sistema deve rejeitar ou evidenciar qualquer cálculo que ignore os dias úteis, usando uma data padrão ou inconsistência entre cidade/UF e prazo. A regra do README determina que o cálculo deve seguir a lógica de dias úteis, e a data não pode ser aleatória, fixa para todos ou divergente da regra contratada.
 
 **Resultado obtido:**
+A API retornou `data_coleta = 2026-07-02` e `data_prazo = 2026-07-07`, mostrando que o sistema calculou corretamente os 3 dias úteis e não aplicou uma data genérica ou inconsistente. O cenário negativo validado não revelou falha de regra para esse caso de teste.
 
-**Status:**
+**Status:** Passou
 
-**Bug relacionado:**
+**Bug relacionado:** Nenhum

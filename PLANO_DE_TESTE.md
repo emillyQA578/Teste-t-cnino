@@ -43,10 +43,20 @@ Este defeito deve ser priorizado porque impacta diretamente a confiabilidade das
 ### Fora do escopo
 
 <!-- O que você decidiu não testar. Justifique cada exclusão. -->
+Dei prioridade ao caso um "prazo: cliente cobra data de entrega, olhamos no sistema e passamos a data que consta la  mas a informação não bate .O que pode estar causando isso?"
+pois afeta confiança do cliente com as informações diretas que enviamos, o cliente vem até nós e solicita ajuda porém nossa ajuda/atendimento esta sem credibilidade. 
+
+Caso dois - encomenda marcada como entregue sem nunca ter sido coletada, não se sabe se foi o time ou o sistema. Dei menos prioridade para este caso pois pode ser investigado de forma interna se é um problema de equipe e comunicação ou realmente sistema. 
+
 
 ## 3. Ambiente
 
-<!-- Versão do Node, sistema operacional, navegador, URL, como resetar os dados. -->
+- Versão do Node: 24.19.0 (compatível com a exigência do projeto de Node 18+)
+- Sistema operacional: Windows 11
+- Navegador utilizado para validação: navegador padrão do sistema, via requisições HTTP e API local
+- URL da aplicação: http://localhost:3000
+- Reset dos dados: usar `POST /_reset` para restaurar os dados iniciais da aplicação em memória
+- Repositório/estrutura do projeto: aplicação com servidor em `server.js` e módulos em `src/`, além da interface estática em `public/`
 
 ## 4. Estratégia
 
