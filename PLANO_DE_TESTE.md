@@ -32,14 +32,7 @@ O que vou cobrir pois considirei prioridade? Data estimada
   - não deve haver divergência entre a data apresentada e os dados usados para o cálculo;
 - o sistema não pode trazer uma data padrão para todos, deve considerar as informações de região e tipo de transporte.
 
-Quais tipos de testes podem ser feitos para cobrir esse bug? 
--Teste de API 
-validar os endpoints que retornam as entregas e suas datas estimadas;
-confirmar que a resposta contém o valor esperado para diferentes cenários.
 
--Teste de interface (UI)
-validar se a tela exibe a data estimada corretamente para diferentes entregas;
-verificar se a informação não fica inconsistente ou padrão para todos os casos.
 
 Exemplo de risco que esse cenário cobre:
 - o sistema calcula a data estimada com base em um prazo incorreto ou em uma regra desatualizada, gerando uma data que não condiz com a realidade do cliente.
@@ -61,22 +54,40 @@ Este defeito deve ser priorizado porque impacta diretamente a confiabilidade das
 Como você vai testar: exploratório, baseado em requisito, teste de contrato
 de API, teste de tela... Diga também como usou o README como referência.
 -->
+Quais tipos de testes podem ser feitos para cobrir esse bug? 
+-Teste de API 
+validar os endpoints que retornam as entregas e suas datas estimadas;
+confirmar que a resposta contém o valor esperado para diferentes cenários.
+
+-Teste de interface (UI)
+validar se a tela exibe a data estimada corretamente para diferentes entregas;
+verificar se a informação não fica inconsistente ou padrão para todos os casos.
 
 ## 5. Riscos e priorização
 
-<!--
-Quais áreas do sistema oferecem mais risco ao negócio e por isso recebem mais
-atenção. Uma tabela ajuda:
-
 | Área | Risco se falhar | Prioridade |
 |---|---|---|
-|  |  |  |
--->
+| Cálculo de data estimada de entrega | A entrega pode receber uma data inconsistente, padrão ou incorreta, gerando erros de planejamento, atraso na entrega e perda de confiança do cliente | Alta |
+| Regras de negócio por região/UF e tipo de transporte | O sistema pode ignorar regras específicas do cliente e da rota, causando decisões equivocadas e falhas operacionais | Alta |
+| Integração entre API e interface | A API pode devolver dados corretos, mas a tela pode exibir valor divergente, criando inconsistência para usuários e suporte | Alta |
+| Validação de dados do cliente e do pedido | Informações incompletas ou inconsistentes podem gerar estimativas erradas e impactar a confiabilidade do processo | Média |
+| Fluxo de visualização em lista/detalhe | Usuários podem confundir a informação em diferentes telas, gerando retrabalho e falhas de comunicação | Média |
 
 ## 6. Critérios de entrada e saída
 
-<!-- Quando você considera o teste iniciado e quando considera concluído. -->
+Critérios de entrada:
+- o ambiente de teste está disponível e acessível;
+- existe ao menos uma entrega cadastrada com dados válidos de cliente, cidade, UF, tipo de transporte e datas estimadas;
+- as regras de negócio para cálculo da data de entrega estão documentadas ou disponíveis para comparação;
+- a API e a interface de listagem/detalhe estão funcionando em ambiente de homologação ou local.
+
+Critérios de saída:
+- todos os cenários prioritários de data estimada foram validados;
+- a data exibida na interface não diverge da regra de negócio e dos dados do cliente;
+- não há inconsistência entre os dados retornados pela API e a apresentação na tela;
+- os defeitos críticos encontrados foram registrados e priorizados para correção;
+- a equipe considera o teste concluído quando os riscos principais de negócio foram verificados e não há evidência de falha crítica no fluxo analisado.
 
 ## 7. Cronograma
 
-<!-- Como distribuiu o tempo disponível entre as atividades. -->
+O cronograma deve começar com a preparação do ambiente e a revisão das regras de negócio. Em seguida, valida-se a API para confirmar se a data estimada está sendo calculada corretamente para diferentes cenários. Depois, testa-se a interface para verificar se a informação exibida é consistente com os dados do cliente e com a regra aplicada. Por fim, revisam-se os defeitos, validam-se os casos limites e fecha-se o ciclo quando os riscos principais forem avaliados e não houver inconsistência crítica.
