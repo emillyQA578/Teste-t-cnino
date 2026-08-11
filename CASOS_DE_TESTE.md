@@ -10,48 +10,58 @@ resultado.
 Repita o bloco abaixo para cada caso.
 -->
 
-## CT-01 — <título do caso>
+## CT-01 — Validação de consistência entre data estimada e dados do cliente
 
 | | |
 |---|---|
-| **Funcionalidade** | <listagem / cadastro / status / prazo / ...> |
-| **Prioridade** | Alta / Média / Baixa |
-| **Tipo** | Positivo / Negativo / Limite |
-| **Camada** | UI / API |
+| **Funcionalidade** | prazo |
+| **Prioridade** | Alta |
+| **Tipo** | Positivo |
+| **Camada** | API |
 
 **Pré-condição:**
-<!-- Estado necessário antes de começar. Ex.: dados resetados via POST /_reset. -->
+Dados resetados via `POST /_reset`. Existe uma transportadora ativa com prazo de 3 dias úteis. A entrega será criada com `data_coleta = 2026-07-02`, cidade e UF válidas e cliente com dados completos.
 
 **Passos:**
-1.
-2.
+1. Resetar os dados do sistema.
+2. Criar uma entrega com `id_transportadora` ativa, `cidade`, `uf`, `peso_kg` e `volumes` válidos.
+3. Informar `data_coleta` como `2026-07-02`.
+4. Consultar a entrega criada por `GET /api/entregas/{id}`.
+5. Verificar a `data_prazo` retornada.
 
 **Resultado esperado:**
-<!-- Um resultado observável e verificável. Cite a regra do README que o sustenta. -->
+A data de prazo deve ser calculada considerando apenas dias úteis, conforme a regra do README: coleta em 02/07/2026 (quinta) + 3 dias úteis resulta em 07/07/2026 (terça), ignorando sábado e domingo. A data exibida deve refletir o prazo da transportadora e não uma data genérica ou padrão para todos os clientes.
 
 **Resultado obtido:**
+A API retornou a entrega criada com `data_coleta = 2026-07-02` e `data_prazo = 2026-07-07`, confirmando o cálculo de 3 dias úteis: sexta, segunda e terça. O resultado observado está em conformidade com a regra do README e não apresentou data padrão ou divergência para o cliente testado.
 
-**Status:** Passou / Falhou / Bloqueado
+**Status:** Passou
 
-**Bug relacionado:** <arquivo em bugs/, se houver>
+**Bug relacionado:** Nenhum
 
 ---
 
-## CT-02 — <título do caso>
+## CT-02 — Data estimada inconsistente quando a regra de negócio não é aplicada
 
 | | |
 |---|---|
-| **Funcionalidade** | |
-| **Prioridade** | |
-| **Tipo** | |
-| **Camada** | |
+| **Funcionalidade** | prazo |
+| **Prioridade** | Alta |
+| **Tipo** | Negativo |
+| **Camada** | API |
 
 **Pré-condição:**
+Dados resetados via `POST /_reset`. Existe uma transportadora ativa com `prazo_dias = 3` e uma entrega com `data_coleta = 2026-07-02`.
 
 **Passos:**
-1.
+1. Resetar os dados do sistema.
+2. Criar uma entrega válida com cidade, UF e transportadora ativa.
+3. Consultar a entrega após a criação.
+4. Verificar se a data calculada considera os dias úteis corretamente.
+5. Comparar o resultado com a regra esperada da transportadora.
 
 **Resultado esperado:**
+O sistema deve rejeitar ou evidenciar qualquer cálculo que ignore os dias úteis, usando uma data padrão ou inconsistência entre cidade/UF e prazo. A regra do README determina que o cálculo deve seguir a lógica de dias úteis, e a data não pode ser aleatória, fixa para todos ou divergente da regra contratada.
 
 **Resultado obtido:**
 
