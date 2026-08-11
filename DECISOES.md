@@ -8,34 +8,34 @@ própria e o que investigou e concluiu que estava certo.
 
 ## 1. O que ficou de fora
 
-<!--
-Liste o que não foi testado e a justificativa. "Faltou tempo" é uma resposta
-aceitável desde que acompanhada do critério que você usou para escolher o que
-sacrificar.
-
 | Item não coberto | Por quê | Risco de deixar assim |
 |---|---|---|
-|  |  |  |
--->
+| Casos de regressão em outras rotas e status | Foquei na regra crítica de prazo e no tempo disponível | Pequeno, mas pode esconder problemas fora do escopo principal |
+| Testes aprofundados de interface/UX | O objetivo principal era validar a regra de negócio e a consistência de dados | Médio, pois a tela pode mostrar informação diferente da API |
+| Cobertura de todos os estados e UF/transportadoras | Precisava priorizar cenários mais relevantes para a regra estudada | Médio, porque alguns casos limítrofes podem não ter sido cobertos |
 
 ## 2. Ambiguidades e interpretações
 
-<!--
-Pontos em que a documentação não foi conclusiva, a interpretação que você
-adotou e por quê. Se preferiria ter perguntado a alguém, diga a quem e o quê.
--->
+A documentação não detalha todas as regras por região, UF ou tipo de transporte. Então, adotei a regra explícita do README: prazo em dias úteis, ignorando sábado e domingo, e cálculo pela transportadora.
 
 ## 3. Comportamentos que investiguei e considerei corretos
 
-<!--
-Coisas que estranhou à primeira vista mas que se confirmaram como
-comportamento esperado. Registre o que te fez mudar de ideia.
--->
+- O cálculo de prazo respeita dias úteis.
+- O sistema ignora sábado e domingo no cálculo.
+- Entregas canceladas ficam fora da listagem padrão.
+- Transportadoras inativas não aceitam novas entregas.
 
 ## 4. Critério de severidade
 
-<!-- Como você decidiu o que é Crítico, Alto, Médio e Baixo neste contexto. -->
+- Crítico: erro no prazo/entrega que afeta planejamento e confiança do cliente.
+- Alto: inconsistência entre API e interface ou regra de negócio.
+- Médio: dados incompletos ou cenários limitados sem impacto imediato grave.
+- Baixo: problemas de apresentação ou linguagem sem risco operacional.
 
 ## 5. O que eu faria com mais tempo
 
-<!-- Próximos passos, em ordem de prioridade. -->
+- automatizar casos de API e UI;
+- testar mais UF, cidades e transportadoras;
+- validar regras com PO e desenvolvedores;
+- aumentar a cobertura de casos de limite e regressão;
+- reforçar documentação do comportamento esperado.
