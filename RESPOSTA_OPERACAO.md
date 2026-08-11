@@ -16,6 +16,15 @@ Apague estes comentários antes de entregar.
 -->
 
 **Para:** Camila Ferraz — Coordenação de Operações
-**Assunto:**
+**Assunto:** Confiabilidade do sistema e risco na informação de prazo de entrega
 
-<!-- sua mensagem aqui -->
+Olá Camila,
+
+Em resposta à sua pergunta, hoje não dá para afirmar que o sistema está 100% seguro e confiável. Durante a análise do fluxo de entregas, identificamos que a data estimada de entrega pode deixar de refletir corretamente a regra de negócio e, com isso, gerar informação inconsistente para a operação e para o cliente.
+
+O problema mais grave está na forma como o prazo é calculado e apresentado. Quando a data não considera corretamente os parâmetros relevantes.
+Enquanto essa questão não for corrigida, o mais prudente é validar manualmente as datas mais importantes antes de confirmar qualquer prazo ao cliente e registrar divergências enquanto revisamos a regra de cálculo para entregas.
+
+Atenciosamente,
+
+Emilly Marques.
